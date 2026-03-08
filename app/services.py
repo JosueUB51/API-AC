@@ -129,6 +129,8 @@ Reglas:
         "HTTP-Referer": "http://localhost:8000",
         "X-Title": "Clasificador de Areas Ciudadanas"
     }
+    
+    print("API KEY:", OPENROUTER_API_KEY[:15])
 
     response = requests.post(
         OPENROUTER_URL,
