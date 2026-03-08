@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "").strip()
-OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-4.1-nano").strip()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini").strip()
 
-if not OPENROUTER_API_KEY:
-    raise ValueError("Falta OPENROUTER_API_KEY en el archivo .env")
+if not OPENAI_API_KEY:
+    raise ValueError("Falta OPENAI_API_KEY en las variables de entorno")
