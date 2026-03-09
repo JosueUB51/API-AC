@@ -14,6 +14,7 @@ def normalize_percentages(data: Dict[str, float]) -> Dict[str, float]:
 
     for area in AREAS:
         value = data.get(area, 0)
+
         try:
             value = float(value)
         except (TypeError, ValueError):
@@ -28,6 +29,7 @@ def normalize_percentages(data: Dict[str, float]) -> Dict[str, float]:
 
     total = sum(clean.values())
 
+    # Si el modelo devuelve todo mal
     if total <= 0:
         uniform = round(100 / len(AREAS), 2)
         clean = {area: uniform for area in AREAS}
@@ -36,6 +38,7 @@ def normalize_percentages(data: Dict[str, float]) -> Dict[str, float]:
         return clean
 
     normalized = {}
+
     for area, value in clean.items():
         normalized[area] = round((value / total) * 100, 2)
 
@@ -76,8 +79,11 @@ Reglas:
 
     content = response.choices[0].message.content
 
+    # 🔹 limpiar markdown que a veces devuelve el modelo
+    clean_content = content.replace("```json", "").replace("```", "").strip()
+
     try:
-        parsed = json.loads(content)
+        parsed = json.loads(clean_content)
     except Exception:
         raise ValueError(f"Respuesta no válida del modelo: {content}")
 
